@@ -9,6 +9,8 @@ import Layout from '@/layout'
 import dashboard from './modules/dashboard'
 import dataAnalysis from './modules/dataAnalysis'
 import userClustering from './modules/userClustering'
+import dataManage from './modules/dataManage'
+import configManage from './modules/configManage'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -72,6 +74,8 @@ export const asyncRoutes = [
   dashboard,
   dataAnalysis,
   userClustering,
+  dataManage,
+  configManage,
   {
     path: '/example',
     component: Layout,

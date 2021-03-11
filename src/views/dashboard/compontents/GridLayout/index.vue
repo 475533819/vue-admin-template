@@ -10,7 +10,6 @@
     :margin="[10, 10]"
     :use-css-transforms="true"
     :auto-size="true"
-
     @layout-created="layoutCreatedEvent"
     @layout-before-mount="layoutBeforeMountEvent"
     @layout-mounted="layoutMountedEvent"
@@ -33,13 +32,14 @@
       @moved="movedEvent"
     >
       <div class="chart-container">
-        <ChartCompose ref="chartboard" height="100%" width="100%" />
+        <ChartCompose ref="chartboard" :class-name="item.className" :chart-data="lineChartData" height="100%" width="100%" />
       </div>
     </grid-item>
   </grid-layout>
 </template>
 
 <script>
+import _ from 'lodash'
 import VueGridLayout from 'vue-grid-layout'
 import ChartCompose from '@/components/Charts/ChartCompose'
 export default {
@@ -48,6 +48,7 @@ export default {
     GridLayout: VueGridLayout.GridLayout,
     GridItem: VueGridLayout.GridItem,
     ChartCompose
+
   },
   data() {
     return {
@@ -56,14 +57,20 @@ export default {
         x: 0,
         y: 0,
         w: 12,
-        h: 8
+        h: 8,
+        className: _.uniqueId('chart_')
       }, {
         i: '2',
         x: 12,
         y: 0,
         w: 12,
-        h: 8
-      }]
+        h: 8,
+        className: _.uniqueId('chart_')
+      }],
+      lineChartData: {
+        expectedData: [100, 120, 161, 134, 105, 160, 165],
+        actualData: [120, 82, 91, 154, 162, 140, 145]
+      }
     }
   },
   methods: {
