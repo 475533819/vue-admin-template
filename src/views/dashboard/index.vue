@@ -1,12 +1,28 @@
 <template>
   <div class="createPost-container">
     <sticky :z-index="10" :class-name="'sub-navbar draft'">
-      <el-button class="pan-btn blue-btn">
-        新增看板
-      </el-button>
-      <el-button class="pan-btn green-btn" @click="skip">
-        看板库
-      </el-button>
+      <el-row :gutter="20" class="top-form">
+        <el-col :span="20" style="text-align: left">
+          <el-date-picker
+            v-model="value2"
+            type="daterange"
+            align="right"
+            unlink-panels
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+            :picker-options="pickerOptions"
+          />
+        </el-col>
+        <el-col :span="4" style="text-align: right">
+          <el-button class="pan-btn blue-btn">
+            新增看板
+          </el-button>
+          <el-button class="pan-btn green-btn" @click="skip">
+            看板库
+          </el-button>
+        </el-col>
+      </el-row>
     </sticky>
     <div class="createPost-main-container">
       <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
@@ -27,7 +43,35 @@ export default {
   components: { Sticky, GridLayout },
   data() {
     return {
-      activeName: 'first'
+      activeName: 'first',
+      pickerOptions: {
+        shortcuts: [{
+          text: '最近一周',
+          onClick(picker) {
+            const end = new Date()
+            const start = new Date()
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
+            picker.$emit('pick', [start, end])
+          }
+        }, {
+          text: '最近一个月',
+          onClick(picker) {
+            const end = new Date()
+            const start = new Date()
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
+            picker.$emit('pick', [start, end])
+          }
+        }, {
+          text: '最近三个月',
+          onClick(picker) {
+            const end = new Date()
+            const start = new Date()
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
+            picker.$emit('pick', [start, end])
+          }
+        }]
+      },
+      value2: ''
     }
   },
   mounted() {
