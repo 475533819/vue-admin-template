@@ -8,7 +8,7 @@ import getPageTitle from '@/utils/get-page-title'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
-const whiteList = ['/login'] // no redirect whitelist
+// const whiteList = ['/login'] // no redirect whitelist
 
 const loginInfo = { username: 'admin', password: '111111' } // user
 

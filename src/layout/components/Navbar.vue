@@ -62,7 +62,12 @@ export default {
     },
     async logout() {
       await this.$store.dispatch('user/logout')
-      this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+      this.$message({
+        type: 'success',
+        message: '登出成功，跳转到P10登录页'
+      })
+      return
+      // this.$router.push(`/login?redirect=${this.$route.fullPath}`)
     }
   }
 }
